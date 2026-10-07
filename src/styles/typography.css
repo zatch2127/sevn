@@ -1,0 +1,10 @@
+@font-face { font-family: 'Dm Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/media/dm-mono-normal-400.ttf') format('truetype'); }
+@font-face { font-family: 'Dm Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('/media/dm-mono-normal-500.ttf') format('truetype'); }
+@font-face { font-family: 'Manrope'; font-style: normal; font-weight: 400; font-display: swap; src: url('/media/manrope-normal-400.ttf') format('truetype'); }
+@font-face { font-family: 'Manrope'; font-style: normal; font-weight: 500; font-display: swap; src: url('/media/manrope-normal-500.ttf') format('truetype'); }
+@font-face { font-family: 'Manrope'; font-style: normal; font-weight: 600; font-display: swap; src: url('/media/manrope-normal-600.ttf') format('truetype'); }
+@font-face { font-family: 'Manrope'; font-style: normal; font-weight: 700; font-display: swap; src: url('/media/manrope-normal-700.ttf') format('truetype'); }
+@font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 500; font-display: swap; src: url('/media/playfair-display-italic-500.ttf') format('truetype'); }
+@font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 600; font-display: swap; src: url('/media/playfair-display-italic-600.ttf') format('truetype'); }
+@font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 500; font-display: swap; src: url('/media/playfair-display-normal-500.ttf') format('truetype'); }
+@font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 600; font-display: swap; src: url('/media/playfair-display-normal-600.ttf') format('truetype'); }
