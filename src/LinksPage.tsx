@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import SevnBrand from './components/SevnBrand';
 import './styles/links.css';
 
 const projects = [
@@ -80,7 +81,9 @@ export default function LinksPage() {
   return (
     <main className="links-directory">
       <div className="links-directory__top">
-        <a className="links-directory__brand" href="/" aria-label="Terra Arc home">TERRA <span>ARC</span></a>
+        <a className="links-directory__brand" href="/cafe/" aria-label="SEVN Café and Bakehaus home">
+          <SevnBrand />
+        </a>
         <span className="links-directory__eyebrow">Project directory · 2026</span>
       </div>
 

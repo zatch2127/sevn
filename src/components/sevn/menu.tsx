@@ -28,8 +28,9 @@ function EditorialMenuRow({ item }: { item: typeof data.menu[number]['items'][nu
   );
 }
 
-export function MenuPage() {
-  const [category, setCategory] = useState('all');
+export function MenuPage({ initialNote }: { initialNote?: string }) {
+  const initialCategory = data.menu.find(section => section.note === initialNote)?.id ?? 'all';
+  const [category, setCategory] = useState(initialCategory);
   return <>
     <PageCover title="The menu." label="Seven notes. One counter." image={bakery} />
     <section className="section editorial-menu">

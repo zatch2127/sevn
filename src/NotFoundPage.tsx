@@ -1,9 +1,12 @@
+import SevnBrand from './components/SevnBrand';
 import './styles/not-found.css';
 
 export default function NotFoundPage() {
   return (
     <main className="not-found">
-      <a className="not-found__brand" href="/">TERRA <span>ARC</span></a>
+      <a className="not-found__brand" href="/cafe/" aria-label="SEVN Café and Bakehaus home">
+        <SevnBrand />
+      </a>
       <div className="not-found__content">
         <p>404 · PAGE NOT FOUND</p>
         <h1>This page<br /><em>is off the map.</em></h1>

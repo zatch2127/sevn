@@ -1,0 +1,334 @@
+.story-flow {
+  position: relative;
+  z-index: 2;
+  overflow-x: clip;
+  padding: clamp(80px, 11vw, 148px) 0 clamp(60px, 8vw, 104px);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.story-flow__layout {
+  --gap: clamp(32px, 5vw, 72px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--gap);
+}
+
+/* ================= LEFT: framed sticky statement ================= */
+
+.story-flow__statement-column {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 560px;
+  padding-block: clamp(20px, 4vh, 48px);
+}
+
+/* column swap: both columns slide across each other */
+.story-flow__statement-column,
+.story-flow__chapters {
+  transition: transform 1.1s var(--ease);
+  will-change: transform;
+}
+
+/* chapter 2: statement goes RIGHT, chapters go LEFT */
+.story-flow[data-active-story="1"] .story-flow__statement-column {
+  transform: translateX(calc(100% + var(--gap)));
+}
+
+.story-flow[data-active-story="1"] .story-flow__chapters {
+  transform: translateX(calc(-100% - var(--gap)));
+}
+
+/* chapter 1 and chapter 3: original sides (no rule needed) */
+
+.story-flow__statement {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  overflow: hidden;            /* keeps the motion INSIDE the frame */
+  isolation: isolate;
+}
+
+.story-flow__statement > .eyebrow {
+  position: absolute;
+  top: calc(50% - 140px);
+  width: 100%;
+  color: var(--muted-foreground);
+  bottom: 5px;
+}
+
+.story-flow__statement-motion {
+  --shift: 0px;
+  --tilt: 0deg;
+  --rise: 28px;
+  width: 100%;
+  padding-inline: 24px;
+  opacity: 0;
+  filter: blur(6px);
+  transform: translate3d(var(--shift), var(--rise), 0) rotate(var(--tilt)) scale(.94);
+  transition: opacity .8s ease, filter .8s ease, transform 1s var(--ease);
+  will-change: transform, opacity;
+}
+
+/* pop-in (fade + rise) when it reaches the centre */
+.story-flow__statement[data-center-reached="true"] .story-flow__statement-motion {
+  --rise: 0px;
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(var(--shift), var(--rise), 0) rotate(var(--tilt)) scale(1);
+}
+
+.story-flow__statement h2 {
+  max-width: 13ch;
+  margin-inline: auto;
+  font-size: clamp(39px, 5vw, 66px);
+  line-height: 1.05;
+  transform-style: preserve-3d;
+}
+
+.story-flow__statement h2 em {
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
+
+/* ================= 3D letters ================= */
+
+.story-flow__word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.story-flow__letter {
+  display: inline-block;
+  transform-origin: 50% 50%;
+  /* one full 360deg Y-spin per chapter step, driven by --story */
+  transform: perspective(700px) rotateY(calc(var(--story, 0) * 360deg));
+  transition: transform 1.3s var(--ease);
+  transition-delay: calc(var(--i) * 28ms);   /* ripple across the letters */
+  will-change: transform;
+}
+
+/* ================= Links ================= */
+
+.story-flow__statement .story-flow__intro-link {
+  position: absolute;
+  top: calc(50% + 125px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.story-flow__intro-link,
+.story-flow__chapter-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--border);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.story-flow__intro-link svg,
+.story-flow__chapter-link svg {
+  width: 15px;
+  height: 15px;
+  transition: transform .25s ease;
+}
+
+.story-flow__intro-link:hover svg,
+.story-flow__chapter-link:hover svg {
+  transform: translateX(4px);
+}
+
+/* ================= RIGHT: framed chapter pop-ups ================= */
+
+.story-flow__chapters {
+  display: grid;
+  gap: 24px;
+}
+
+.story-flow__chapter {
+  display: flex;
+  min-height: 76vh;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(32px, 4vw, 56px);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  overflow: hidden;            /* frame: content never leaves the box */
+  opacity: .35;
+  transform: scale(.97);
+  transition: opacity .6s ease, transform .8s var(--ease);
+}
+
+.story-flow__chapter[data-active="true"] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* everything inside is hidden until its chapter is active */
+.story-flow__chapter > * {
+  opacity: 0;
+}
+
+.story-flow__chapter[data-active="true"] > * {
+  opacity: 1;
+  animation-duration: .9s;
+  animation-timing-function: var(--ease);
+  animation-fill-mode: both;
+}
+
+/* stagger the lines */
+.story-flow__chapter[data-active="true"] > :nth-child(2) { animation-delay: .08s; }
+.story-flow__chapter[data-active="true"] > :nth-child(3) { animation-delay: .16s; }
+.story-flow__chapter[data-active="true"] > :nth-child(4) { animation-delay: .24s; }
+
+/* chapter 1: simple fade + rise */
+.story-flow__chapter:nth-child(1)[data-active="true"] > * {
+  animation-name: story-pop-up;
+}
+
+/* chapter 2: content comes in from the LEFT (statement went right) */
+.story-flow__chapter:nth-child(2)[data-active="true"] > * {
+  animation-name: story-pop-from-left;
+}
+
+/* chapter 3: content comes in from the RIGHT (statement came back left) */
+.story-flow__chapter:nth-child(3)[data-active="true"] > * {
+  animation-name: story-pop-from-right;
+}
+
+.story-flow__chapter h3 {
+  max-width: 12ch;
+  margin-top: 20px;
+  font-size: clamp(36px, 4.5vw, 62px);
+  line-height: 1.05;
+}
+
+.story-flow__chapter > .eyebrow {
+  color: var(--muted-foreground);
+}
+
+.story-flow__chapter > p:not(.eyebrow) {
+  max-width: 40ch;
+  margin-top: 18px;
+  color: var(--muted-foreground);
+  font-size: clamp(14px, 1.25vw, 17px);
+  line-height: 1.8;
+}
+
+.story-flow :focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* ================= Keyframes ================= */
+
+@keyframes story-pop-up {
+  from { opacity: 0; transform: translateY(32px) scale(.96); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes story-pop-from-right {
+  from { opacity: 0; transform: translateX(80px) rotate(3deg); filter: blur(4px); }
+  to   { opacity: 1; transform: translateX(0) rotate(0); filter: blur(0); }
+}
+
+@keyframes story-pop-from-left {
+  from { opacity: 0; transform: translateX(-80px) rotate(-3deg); filter: blur(4px); }
+  to   { opacity: 1; transform: translateX(0) rotate(0); filter: blur(0); }
+}
+
+/* ================= Mobile ================= */
+
+@media (max-width: 760px) {
+  .story-flow {
+    padding-block: 70px;
+  }
+
+  .story-flow__layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  /* single column: no left/right swap, keep only the letter spin */
+  .story-flow__statement-column,
+  .story-flow__chapters {
+    transform: none !important;
+  }
+
+  .story-flow__statement-column {
+    position: relative;
+    height: min(76svh, 640px);
+    min-height: 480px;
+    padding-block: 0;
+  }
+
+  .story-flow__statement > .eyebrow {
+    top: calc(50% - 104px);
+  }
+
+  .story-flow__statement h2 {
+    max-width: 12ch;
+    font-size: clamp(36px, 9vw, 48px);
+  }
+
+  .story-flow__statement .story-flow__intro-link {
+    top: calc(50% + 105px);
+  }
+
+  .story-flow__chapter {
+    min-height: 60svh;
+    padding: 32px 22px;
+    border-radius: 22px;
+  }
+
+  .story-flow__chapter h3 {
+    max-width: 15ch;
+    font-size: clamp(36px, 10vw, 48px);
+  }
+}
+
+/* ================= Reduced motion ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .story-flow__statement-motion {
+    opacity: 1;
+    filter: none;
+    transform: none !important;
+  }
+
+  .story-flow__statement-column,
+  .story-flow__chapters {
+    transform: none !important;
+    transition: none;
+  }
+
+  .story-flow__letter {
+    transform: none;
+    transition: none;
+  }
+
+  .story-flow__chapter,
+  .story-flow__chapter > * {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+    transition: none;
+  }
+
+  .story-flow__intro-link svg,
+  .story-flow__chapter-link svg {
+    transition: none;
+  }
+}

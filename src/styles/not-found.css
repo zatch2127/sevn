@@ -8,13 +8,33 @@
 
 .not-found__brand {
   color: inherit;
-  font: 600 14px "DM Mono", monospace;
-  letter-spacing: .12em;
   text-decoration: none;
 }
 
-.not-found__brand span {
-  color: #987d5c;
+.not-found .sevn-brand {
+  justify-items: start;
+}
+
+.not-found .sevn-brand__wordmark {
+  display: inline-flex;
+  align-items: center;
+  color: #28231f;
+  font: 500 27px/.9 "Bodoni Moda", Georgia, serif;
+  letter-spacing: -.08em;
+}
+
+.not-found .sevn-brand__wordmark svg {
+  width: 18px;
+  height: 18px;
+  fill: #987d5c;
+}
+
+.not-found .sevn-brand__subtitle {
+  color: #746e66;
+  font-size: 7px;
+  letter-spacing: .12em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .not-found__content {

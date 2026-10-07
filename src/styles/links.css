@@ -36,13 +36,39 @@ body:has(.links-directory) {
 }
 
 .links-directory__brand {
-  font-family: "Bodoni Moda", Georgia, serif;
-  font-size: 20px;
-  letter-spacing: .13em;
+  display: inline-flex;
+  color: inherit;
 }
 
-.links-directory__brand span {
-  color: #94775d;
+.sevn-brand {
+  display: inline-grid;
+  justify-items: center;
+  gap: 2px;
+}
+
+.sevn-brand__wordmark {
+  display: inline-flex;
+  align-items: center;
+  color: #31261c;
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-size: 27px;
+  font-weight: 500;
+  letter-spacing: -.08em;
+  line-height: .9;
+}
+
+.sevn-brand__wordmark svg {
+  width: 18px;
+  height: 18px;
+  fill: #94775d;
+}
+
+.sevn-brand__subtitle {
+  color: var(--directory-muted);
+  font-size: 7px;
+  letter-spacing: .12em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .links-directory__eyebrow {
