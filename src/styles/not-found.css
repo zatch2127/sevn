@@ -1,0 +1,70 @@
+.not-found {
+  min-height: 100svh;
+  padding: 30px clamp(24px, 6vw, 88px);
+  background: #f2eee7;
+  color: #28231f;
+  font-family: Manrope, sans-serif;
+}
+
+.not-found__brand {
+  color: inherit;
+  font: 600 14px "DM Mono", monospace;
+  letter-spacing: .12em;
+  text-decoration: none;
+}
+
+.not-found__brand span {
+  color: #987d5c;
+}
+
+.not-found__content {
+  width: min(700px, 100%);
+  margin: clamp(100px, 18vh, 190px) auto 0;
+}
+
+.not-found__content > p {
+  color: #987d5c;
+  font: 11px "DM Mono", monospace;
+  letter-spacing: .12em;
+}
+
+.not-found__content h1 {
+  margin: 20px 0;
+  font: 500 clamp(54px, 10vw, 108px)/.98 "Playfair Display", Georgia, serif;
+  letter-spacing: -.04em;
+}
+
+.not-found__content h1 em {
+  color: #987d5c;
+  font-weight: 400;
+}
+
+.not-found__content > span {
+  color: #746e66;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.not-found__content nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 26px;
+  margin-top: 36px;
+}
+
+.not-found__content nav a {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #b6a995;
+  color: inherit;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.not-found__content nav a:hover {
+  border-color: #28231f;
+}
+
+.not-found a:focus-visible {
+  outline: 2px solid #987d5c;
+  outline-offset: 4px;
+}

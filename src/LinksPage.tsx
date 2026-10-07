@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react';
 import './styles/links.css';
 
 const projects = [
@@ -21,12 +22,12 @@ const projects = [
   },
   {
     number: '03',
-    title: 'SEVN Packaging',
-    type: 'Packaging presentation',
+    title: 'SEVN Animation',
+    type: 'Interactive animation',
     description: 'The responsive packaging concept with scroll scenes, product mockups and interactive previews.',
     href: '/packaging',
     path: '/packaging',
-    theme: 'packaging',
+    theme: 'animation',
   },
   {
     number: '04',
@@ -50,6 +51,32 @@ const cafePages = [
 ];
 
 export default function LinksPage() {
+  const [search, setSearch] = useState('');
+  const destinations = useMemo(
+    () => [
+      ...projects.map(project => ({
+        label: project.title,
+        detail: project.description,
+        path: project.path,
+        href: project.href,
+      })),
+      ...cafePages.map(page => ({
+        label: `SEVN Café — ${page.label}`,
+        detail: 'A page in the full SEVN Café website.',
+        path: `/cafe/#${page.route}`,
+        href: `/cafe/#${page.route}`,
+      })),
+    ],
+    [],
+  );
+  const filteredDestinations = destinations.filter(destination => {
+    const term = search.trim().toLowerCase();
+    return !term
+      || destination.label.toLowerCase().includes(term)
+      || destination.path.toLowerCase().includes(term)
+      || destination.detail.toLowerCase().includes(term);
+  });
+
   return (
     <main className="links-directory">
       <div className="links-directory__top">
@@ -65,6 +92,38 @@ export default function LinksPage() {
         </p>
       </header>
 
+      <section className="links-directory__search" aria-label="Search site links">
+        <label htmlFor="directory-search">Search a page or paste a site path</label>
+        <input
+          id="directory-search"
+          type="search"
+          placeholder="Try “menu”, “/cafe/” or “animation”"
+          value={search}
+          onChange={event => setSearch(event.target.value)}
+          autoComplete="off"
+        />
+        <p aria-live="polite">
+          {search.trim()
+            ? `${filteredDestinations.length} matching ${filteredDestinations.length === 1 ? 'link' : 'links'}`
+            : 'Search by page name or URL to find the right destination.'}
+        </p>
+        {search.trim() && (
+          filteredDestinations.length ? (
+            <nav className="links-directory__results" aria-label="Search results">
+              {filteredDestinations.map(destination => (
+                <a href={destination.href} key={destination.path}>
+                  <span><b>{destination.label}</b><small>{destination.detail}</small></span>
+                  <code>{destination.path}</code>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </nav>
+          ) : (
+            <p className="links-directory__empty">No matching page found. Check the URL or browse the previews below.</p>
+          )
+        )}
+      </section>
+
       <section className="links-directory__projects" aria-label="Project previews">
         {projects.map(project => (
           <article className={`directory-card directory-card--${project.theme}`} key={project.path}>
@@ -76,7 +135,7 @@ export default function LinksPage() {
             <p>{project.description}</p>
             <div className="directory-card__bottom">
               <code>{project.path}</code>
-              <a href={project.href} target="_blank" rel="noreferrer" aria-label={`Open ${project.title}`}>
+              <a href={project.href} aria-label={`Open ${project.title}`}>
                 Open preview <span aria-hidden="true">↗</span>
               </a>
             </div>

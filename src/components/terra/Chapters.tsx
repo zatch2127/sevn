@@ -19,7 +19,14 @@ export function Chapters() {
       <div className="chapter__copy">
         <p className="eyebrow">{chapter.name}</p><h2>{chapter.title}</h2><p>{chapter.text}</p>
         {index === 2 && <div className="pressure-readout"><b>9.0</b><span>BAR / EXTRACTION PRESSURE</span></div>}
-        {index === 4 && <Button variant="ghost" className="reserve-button" disabled title="Reservations are outside this homepage recreation">Reserve a table <ArrowUpRight size={17} /></Button>}
+        {index === 4 && (
+          <nav className="final-links" aria-label="Explore Terra Arc and SEVN">
+            <a className="reserve-button" href="/cafe/">Visit SEVN Café <ArrowUpRight size={17} /></a>
+            <a className="reserve-button" href="/cafe/#/book">Book a table <ArrowUpRight size={17} /></a>
+            <a className="reserve-button" href="/packaging">SEVN Animation <ArrowUpRight size={17} /></a>
+            <a className="final-links__directory" href="/links">Explore all project links <ArrowUpRight size={16} /></a>
+          </nav>
+        )}
       </div>
     </section>)}
   </>;

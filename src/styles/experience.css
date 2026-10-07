@@ -50,6 +50,11 @@
 .pressure-readout b{font:500 40px Playfair Display,serif}
 .pressure-readout span{letter-spacing:0;font:9px DM Mono,monospace}
 .reserve-button{border:1px solid var(--film-outline);border-radius:999px;margin-top:20px;padding:13px 18px}
+.final-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:24px}
+.experience .final-links .reserve-button{margin:0;color:var(--film-white);font-size:11px;text-decoration:none;transition:background .2s ease,border-color .2s ease}
+.experience .final-links .reserve-button:hover{background:#ffffff18;border-color:var(--film-white)}
+.final-links__directory{display:inline-flex;align-items:center;gap:6px;margin:5px 0;color:var(--film-tone-23);font-size:11px;text-decoration:none}
+.final-links__directory:hover{text-decoration:underline;text-underline-offset:4px}
 .side-note{z-index:5;writing-mode:vertical-rl;color:var(--film-tone-31);letter-spacing:0;text-transform:uppercase;align-items:center;gap:11px;font:9px DM Mono,monospace;display:flex;position:fixed;top:50%;right:29px}
 .side-note i{background:var(--film-gold);width:1px;height:48px}
 .contact-link{z-index:20;color:var(--film-tone-16);align-items:center;gap:7px;font:10px DM Mono,monospace;text-decoration:none;display:flex;position:fixed;top:31px;right:25px}
@@ -132,4 +137,3 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--film-focus);outline
 @media(prefers-reduced-motion:reduce){.film-loader span{animation:none}
 .film-scrim,.text-cta svg{transition:none}
 }
-
