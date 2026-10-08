@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "npm run build:cafe-bakehaus && vite",
+    "build": "npm run build:cafe-bakehaus && vite build",
+    "build:cafe-bakehaus": "npm --prefix sevn-cafe-bakehaus run build:standalone",
     "preview": "vite preview"
   },
   "dependencies": {

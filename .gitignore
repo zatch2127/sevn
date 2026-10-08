@@ -1,3 +1,4 @@
 node_modules/
 dist/
+/public/cafe-bakehaus/
 .DS_Store

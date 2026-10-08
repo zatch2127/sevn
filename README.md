@@ -7,8 +7,36 @@ Requires Node.js 22 or newer.
 
 ```sh
 npm install
+npm install --prefix sevn-cafe-bakehaus
 npm run dev
 ```
+
+The ZIP project is extracted into [`sevn-cafe-bakehaus/`](./sevn-cafe-bakehaus/),
+and its standalone app is served at `/cafe-bakehaus/`. The root `dev` and
+`build` scripts build that app before starting or building the main site.
+The ZIP contains image asset descriptors but not all of the original image
+files. The standalone build uses local image fallbacks and locally bundled
+stock photos for the café, story, journal, and mood carousel imagery.
+
+### Café photo sources
+The stock photos below are bundled locally so they remain available without a
+network connection. Unsplash's [license](https://unsplash.com/license) and
+Pexels' [license](https://www.pexels.com/license/) allow free commercial and
+non-commercial use; attribution is appreciated.
+
+| Use | Photo |
+| --- | --- |
+| Morning latte | [Unsplash photo](https://images.unsplash.com/photo-1511920170033-f8396924c348) |
+| Coffee to share | [Unsplash photo](https://images.unsplash.com/photo-1495474472287-4d71bcdd2085) |
+| Coffee and grounds | [Unsplash photo](https://images.unsplash.com/photo-1509785307050-d4066910ec1e) |
+| Croissants | [Unsplash photo](https://images.unsplash.com/photo-1555507036-ab1f4038808a) |
+| Savory toast | [Unsplash photo](https://images.unsplash.com/photo-1484723091739-30a097e8f929) |
+| French toast | [Unsplash photo](https://images.unsplash.com/photo-1525351484163-7529414344d8) |
+| Chocolate cake | [Unsplash photo](https://images.unsplash.com/photo-1558961363-fa8fdf82db35) |
+| Cookies | [Unsplash photo](https://images.unsplash.com/photo-1578985545062-69928b1d9587) |
+| Café interior | [Unsplash photo](https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb) |
+| Café gathering | [Unsplash photo](https://images.unsplash.com/photo-1554118811-1e0d58224f24) |
+| Coffee ready to take away | [Pexels photo by Tima Miroshnichenko](https://www.pexels.com/photo/a-person-holding-a-cup-6612350/) |
 
 ## Reference findings and deliberate differences
 - Reference: https://terra-arc-coffee.netlify.app/
